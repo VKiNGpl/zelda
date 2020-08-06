@@ -18,6 +18,7 @@ function PlayerSwingSwordState:init(player, dungeon)
 
     -- create hitbox based on where the player is and facing
     local direction = self.player.direction
+    
     local hitboxX, hitboxY, hitboxWidth, hitboxHeight
 
     if direction == 'left' then
@@ -42,16 +43,11 @@ function PlayerSwingSwordState:init(player, dungeon)
         hitboxY = self.player.y + self.player.height
     end
 
-    -- separate hitbox for the player's sword; will only be active during this state
     self.swordHitbox = Hitbox(hitboxX, hitboxY, hitboxWidth, hitboxHeight)
-
-    -- sword-left, sword-up, etc
     self.player:changeAnimation('sword-' .. self.player.direction)
 end
 
 function PlayerSwingSwordState:enter(params)
-
-    -- restart sword swing sound for rapid swinging
     gSounds['sword']:stop()
     gSounds['sword']:play()
 
@@ -60,7 +56,6 @@ function PlayerSwingSwordState:enter(params)
 end
 
 function PlayerSwingSwordState:update(dt)
-    
     -- check if hitbox collides with any entities in the scene
     for k, entity in pairs(self.dungeon.currentRoom.entities) do
         if entity:collides(self.swordHitbox) then
@@ -69,13 +64,11 @@ function PlayerSwingSwordState:update(dt)
         end
     end
 
-    -- if we've fully elapsed through one cycle of animation, change back to idle state
     if self.player.currentAnimation.timesPlayed > 0 then
         self.player.currentAnimation.timesPlayed = 0
         self.player:changeState('idle')
     end
 
-    -- allow us to change into this state afresh if we swing within it, rapid swinging
     if love.keyboard.wasPressed('space') then
         self.player:changeState('swing-sword')
     end
@@ -86,10 +79,7 @@ function PlayerSwingSwordState:render()
     love.graphics.draw(gTextures[anim.texture], gFrames[anim.texture][anim:getCurrentFrame()],
         math.floor(self.player.x - self.player.offsetX), math.floor(self.player.y - self.player.offsetY))
 
-    --
-    -- debug for player and hurtbox collision rects VV
-    --
-
+    -- debug for player and hurtbox collision rects
     -- love.graphics.setColor(1.0, 0.0, 1.0, 1.0)
     -- love.graphics.rectangle('line', self.player.x, self.player.y, self.player.width, self.player.height)
     -- love.graphics.rectangle('line', self.swordHurtbox.x, self.swordHurtbox.y,

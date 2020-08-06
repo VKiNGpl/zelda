@@ -27,7 +27,6 @@ function EntityWalkState:update(dt)
     -- assume we didn't hit a wall
     self.bumped = false
 
-    -- boundary checking on all sides, allowing us to avoid collision detection on tiles
     if self.entity.direction == 'left' then
         self.entity.x = self.entity.x - self.entity.walkSpeed * dt
         
@@ -93,7 +92,6 @@ function EntityWalkState:render()
     love.graphics.draw(gTextures[anim.texture], gFrames[anim.texture][anim:getCurrentFrame()],
         math.floor(self.entity.x - self.entity.offsetX), math.floor(self.entity.y - self.entity.offsetY))
     
-    -- debug code
     -- love.graphics.setColor(1.0, 0.0, 1.0, 1.0)
     -- love.graphics.rectangle('line', self.entity.x, self.entity.y, self.entity.width, self.entity.height)
     -- love.graphics.setColor(1.0, 1.0, 1.0, 1.0)

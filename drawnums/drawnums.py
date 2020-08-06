@@ -25,9 +25,9 @@ if __name__ == '__main__':
 
     for y in range(TILES_HIGH):
         for x in range(TILES_WIDE):
-            draw.text((x * TILE_SIZE + 1, y * TILE_SIZE), str(counter), (0, 0, 0), font=font)
-            draw.text((x * TILE_SIZE, y * TILE_SIZE + 1), str(counter), (0, 0, 0), font=font)
-            draw.text((x * TILE_SIZE, y * TILE_SIZE), str(counter), (255, 0, 255), font=font)
+            draw.text((x * TILE_SIZE + 1, y * TILE_SIZE), str(counter), (0.0, 0.0, 0.0), font=font)
+            draw.text((x * TILE_SIZE, y * TILE_SIZE + 1), str(counter), (0.0, 0.0, 0.0), font=font)
+            draw.text((x * TILE_SIZE, y * TILE_SIZE), str(counter), (1.0, 0.0 1.0), font=font)
             counter += 1
     
     # save as renamed tile sheet

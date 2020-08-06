@@ -33,8 +33,6 @@ function Entity:init(def)
     self.invulnerable = false
     self.invulnerableDuration = 0
     self.invulnerableTimer = 0
-
-    -- timer for turning transparency on and off, flashing
     self.flashTimer = 0
 
     self.dead = false
@@ -104,7 +102,6 @@ function Entity:processAI(params, dt)
 end
 
 function Entity:render(adjacentOffsetX, adjacentOffsetY)
-    
     -- draw sprite slightly transparent if invulnerable every 0.04 seconds
     if self.invulnerable and self.flashTimer > 0.06 then
         self.flashTimer = 0
